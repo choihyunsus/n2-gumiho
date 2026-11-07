@@ -76,6 +76,7 @@ function writeText(args, context) {
       output: 'File changed since it was read. Read it again before editing.',
     };
   const temporary = path.join(path.dirname(target), `.gumiho-${randomUUID()}.tmp`);
+  const canonicalRoot = fs.realpathSync.native(context.workspaceRoot);
   try {
     fs.writeFileSync(temporary, data, {
       flag: 'wx',
@@ -93,12 +94,7 @@ function writeText(args, context) {
       success: true,
       output: 'File updated',
       data: { sha256: hash(data) },
-      modifiedFiles: [
-        path
-          .relative(fs.realpathSync.native(context.workspaceRoot), target)
-          .split(path.sep)
-          .join('/'),
-      ],
+      modifiedFiles: [path.relative(canonicalRoot, target).split(path.sep).join('/')],
     };
   } finally {
     if (fs.existsSync(temporary)) fs.unlinkSync(temporary);
