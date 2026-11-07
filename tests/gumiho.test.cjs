@@ -5,6 +5,27 @@ const path = require('node:path');
 const os = require('node:os');
 const { Gumiho, ReconciliationRequired } = require('../dist/library');
 const { MimirDatabase } = require('n2-mimir/storage');
+const { resolveOptions } = require('../dist/gumiho-options');
+const { ToolCatalog } = require('../dist/tool-catalog');
+const { fingerprint } = require('../dist/values');
+
+test('compatible patch releases retain the original workflow identity used by 1.0.0 records', async (t) => {
+  const f = setup(t),
+    options = await resolveOptions(f.options);
+  const original = fingerprint({
+    engineVersion: '1.0.0',
+    tails: options.tails.hash,
+    tools: new ToolCatalog(options.tools).hash,
+    verifier: options.verifier.version,
+    limits: options.limits,
+    mode: options.mode,
+    pipeline: options.pipeline,
+    coordinator: options.coordinator,
+    snapshot: options.scanner.policyHash,
+    expertise: options.expertise,
+  });
+  assert.equal(options.hash, original);
+});
 
 function setup(t, settings = {}) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'n2-gumiho-api-')),

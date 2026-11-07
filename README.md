@@ -11,10 +11,10 @@ N2R enforces preparation and final verification. Mimir stores scoped outcomes an
 Requires Node.js 22 or later. Install the versioned GitHub release asset.
 
 ```sh
-npm install https://github.com/choihyunsus/n2-gumiho/releases/download/v1.0.0/n2-gumiho-1.0.0.tgz
+npm install https://github.com/choihyunsus/n2-gumiho/releases/download/v1.0.1/n2-gumiho-1.0.1.tgz
 ```
 
-The runtime pins N2R 1.0.0 and Mimir 3.0.3. N2R also brings Clotho 4.0.1 and Personas 1.0.0. Gumiho source uses MIT. Mimir and Clotho carry their published non-commercial/commercial license terms. [License](LICENSE), [dependency notices](THIRD-PARTY-NOTICES).
+The runtime pins N2R 1.0.1 and Mimir 3.0.3. N2R also brings Clotho 4.0.1 and Personas 1.0.0. Gumiho source uses MIT. Mimir and Clotho carry their published non-commercial/commercial license terms. [License](LICENSE), [dependency notices](THIRD-PARTY-NOTICES).
 
 ## Run the offline example
 
@@ -180,6 +180,8 @@ Gumiho adds six scoped tables under `gumiho_schema_version = 1`.
 N2R adds its own lifecycle tables and records one scoped outcome when finalization succeeds. A completed failed workflow records a failure experience. Run IDs in N2R use the `gumiho-` namespace. Unversioned Gumiho tables require an explicit migration before use.
 
 ## Recovery
+
+Execution format `1.0.0` identifies the durable workflow contract. Release 1.0.1 reopens matching 1.0.0 records. Provider, tool, verifier and workflow settings participate in the configuration fingerprint.
 
 Reuse the same run ID, session ID, task and configuration after an interruption. Completed matching invocations replay from durable receipts. A pending idempotent operation can run again. An uncertain non-idempotent host effect raises `ReconciliationRequired`.
 

@@ -1,6 +1,6 @@
 {
   "name": "n2-gumiho",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Provider-independent agent tails with durable jobs, bounded execution and artifact-bound verification over the common Soul database.",
   "main": "dist/library.js",
   "types": "dist/library.d.ts",
@@ -23,7 +23,7 @@
   "repository": { "type": "git", "url": "https://github.com/choihyunsus/n2-gumiho" },
   "dependencies": {
     "better-sqlite3": "12.11.1",
-    "n2-recipe": "https://github.com/choihyunsus/n2-recipe/releases/download/v1.0.0/n2-recipe-1.0.0.tgz",
+    "n2-recipe": "https://github.com/choihyunsus/n2-recipe/releases/download/v1.0.1/n2-recipe-1.0.1.tgz",
     "n2-mimir": "https://github.com/choihyunsus/n2-mimir/releases/download/v3.0.3/n2-mimir-3.0.3.tgz",
     "ajv": "^8.20.0",
     "ajv-formats": "^3.0.1"

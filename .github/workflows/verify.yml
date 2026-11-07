@@ -21,3 +21,51 @@ jobs:
       - run: npm run typecheck:consumer
       - run: npm audit --omit=dev --audit-level=low
       - run: npm pack --dry-run
+  package:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: mkdir release && npm pack --pack-destination release
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: gumiho-package
+          path: release/*.tgz
+          if-no-files-found: error
+  installed-consumer:
+    needs: package
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: gumiho-package
+          path: release
+      - run: node -e "const fs=require('node:fs');fs.mkdirSync('consumer');fs.writeFileSync('consumer/package.json',JSON.stringify({name:'gumiho-consumer',version:'1.0.0',private:true}));"
+      - run: npm install --no-fund ../release/n2-gumiho-1.0.1.tgz typescript@5.9.3 @types/node@22.20.5 @types/better-sqlite3@7.6.13
+        working-directory: consumer
+      - run: node -e "require('node:fs').cpSync('tests','consumer/node_modules/n2-gumiho/tests',{recursive:true});"
+      - run: node --test --test-timeout=30000 "tests/*.test.cjs"
+        working-directory: consumer/node_modules/n2-gumiho
+      - run: npm exec --offline -- tsc --noEmit --target ES2022 --module NodeNext --moduleResolution NodeNext --strict --esModuleInterop --skipLibCheck false node_modules/n2-gumiho/tests/consumer.mts node_modules/n2-gumiho/tests/consumer.cts
+        working-directory: consumer
+      - run: npm exec --offline -- n2-gumiho --version
+        working-directory: consumer
+      - run: node --input-type=module -e "import {Gumiho,ollamaChat} from 'n2-gumiho';console.log(typeof Gumiho,typeof ollamaChat);"
+        working-directory: consumer
+      - run: npm audit --omit=dev --audit-level=low
+        working-directory: consumer

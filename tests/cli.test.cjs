@@ -115,7 +115,7 @@ test('CLI imports an operator-selected ESM adapter and preserves an existing dif
 test('CLI argument and result-file validation rejects unsupported input before workflow effects', async (t) => {
   const root = directory(t),
     missing = path.join(root, 'missing.db');
-  assert.equal(cli(['--version']).stdout.trim(), '1.0.0');
+  assert.equal(cli(['--version']).stdout.trim(), '1.0.1');
   assert.match(cli(['--help']).stdout, /reconcile/);
   assert.equal(
     cli(['status', '--db', missing, '--project', 'demo', '--agent', 'worker', '--run-id', 'x'])

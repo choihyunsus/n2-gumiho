@@ -19,7 +19,7 @@ import {
 import { ToolCatalog } from './tool-catalog';
 import { fingerprint, identity, plainJson, textValue } from './values';
 import { objectValue } from './model-validation';
-import { VERSION } from './version';
+import { REPLAY_VERSION } from './version';
 import {
   coordinatorConfiguration,
   type CoordinatorConfiguration,
@@ -81,7 +81,7 @@ export async function resolveOptions(options: GumihoOptions): Promise<ResolvedOp
   const expertise = options.expertise ?? true;
   if (typeof expertise !== 'boolean') throw new Error('Expertise must be a boolean');
   const hash = fingerprint({
-    engineVersion: VERSION,
+    engineVersion: REPLAY_VERSION,
     tails: tails.hash,
     tools: catalog.hash,
     verifier: verifier.version,

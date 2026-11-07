@@ -11,10 +11,10 @@ N2R이 준비와 최종 검증을 강제하고, Mimir가 Soul 공통 SQLite DB�
 Node.js 22 이상이 필요합니다. 버전이 고정된 GitHub 릴리스 파일을 설치합니다.
 
 ```sh
-npm install https://github.com/choihyunsus/n2-gumiho/releases/download/v1.0.0/n2-gumiho-1.0.0.tgz
+npm install https://github.com/choihyunsus/n2-gumiho/releases/download/v1.0.1/n2-gumiho-1.0.1.tgz
 ```
 
-런타임은 N2R 1.0.0과 Mimir 3.0.3을 사용합니다. N2R을 통해 Clotho 4.0.1과 Personas 1.0.0도 연결됩니다. 구미호 소스는 MIT이며, Mimir와 Clotho에는 각 배포판의 비상업·상업 이용 조건이 적용됩니다. [라이선스](LICENSE), [의존성 고지](THIRD-PARTY-NOTICES).
+런타임은 N2R 1.0.1과 Mimir 3.0.3을 사용합니다. N2R을 통해 Clotho 4.0.1과 Personas 1.0.0도 연결됩니다. 구미호 소스는 MIT이며, Mimir와 Clotho에는 각 배포판의 비상업·상업 이용 조건이 적용됩니다. [라이선스](LICENSE), [의존성 고지](THIRD-PARTY-NOTICES).
 
 ## 오프라인 예제 실행
 
@@ -180,6 +180,8 @@ Soul·Mimir와 동일한 SQLite 파일을 명시적으로 지정합니다. `proj
 N2R은 자체 수명주기 테이블을 사용하고 최종 저장이 성공하면 범위가 지정된 결과를 한 건 기록합니다. 실패로 완료된 작업은 실패 경험으로 기록합니다. N2R 작업 ID에는 `gumiho-` 접두사를 사용합니다. 버전 정보가 없는 기존 구미호 테이블은 명시적인 이전 절차가 필요합니다.
 
 ## 중단 후 복원
+
+실행 형식 ID `1.0.0`으로 저장 기록의 규약을 식별합니다. 1.0.1 배포판은 조건이 일치하는 1.0.0 기록을 복원합니다. 공급자·도구·검증기·작업 설정은 재실행 식별 정보에 포함됩니다.
 
 같은 작업 ID, 세션 ID, 요청과 설정으로 다시 실행합니다. 완료된 호출은 저장된 결과를 사용합니다. 멱등성이 선언된 미완료 작업은 재실행할 수 있습니다. 효과가 불확실한 비멱등 호스트 호출은 `ReconciliationRequired`로 멈춥니다.
 
