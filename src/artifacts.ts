@@ -63,7 +63,7 @@ export class ArtifactScanner {
   readonly policyHash: string;
 
   constructor(root: string, options: SnapshotOptions = {}) {
-    const canonical = realpathSync(path.resolve(textValue(root, 'workspace path', 4096)));
+    const canonical = realpathSync.native(path.resolve(textValue(root, 'workspace path', 4096)));
     this.root = process.platform === 'win32' ? canonical.toLowerCase() : canonical;
     const excluded = options.excludeDirectories ?? [
       '.git',

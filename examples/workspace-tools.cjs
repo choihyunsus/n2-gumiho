@@ -16,9 +16,9 @@ function contained(root, candidate) {
     throw new Error('The example tool requires a file inside the workspace');
 }
 function targetPath(root, filename) {
-  const canonicalRoot = fs.realpathSync(root),
+  const canonicalRoot = fs.realpathSync.native(root),
     requested = path.resolve(root, filename);
-  const parent = fs.realpathSync(path.dirname(requested)),
+  const parent = fs.realpathSync.native(path.dirname(requested)),
     candidate = path.join(parent, path.basename(requested));
   contained(canonicalRoot, candidate);
   if (parent !== canonicalRoot) contained(canonicalRoot, parent);
@@ -94,7 +94,10 @@ function writeText(args, context) {
       output: 'File updated',
       data: { sha256: hash(data) },
       modifiedFiles: [
-        path.relative(fs.realpathSync(context.workspaceRoot), target).split(path.sep).join('/'),
+        path
+          .relative(fs.realpathSync.native(context.workspaceRoot), target)
+          .split(path.sep)
+          .join('/'),
       ],
     };
   } finally {

@@ -96,7 +96,9 @@ test('a workspace directory alias is canonicalized before reading its artifact f
     alias = path.join(parent, 'alias');
   fs.writeFileSync(path.join(root, 'file.txt'), 'contents');
   fs.symlinkSync(root, alias, process.platform === 'win32' ? 'junction' : 'dir');
-  assert.equal((await new ArtifactScanner(alias).scan(signal())).files[0].path, 'file.txt');
+  const scanner = new ArtifactScanner(alias);
+  assert.equal(scanner.root, await canonicalWorkspace(alias));
+  assert.equal((await scanner.scan(signal())).files[0].path, 'file.txt');
 });
 
 test(
