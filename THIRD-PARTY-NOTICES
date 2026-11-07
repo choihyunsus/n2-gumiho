@@ -1,0 +1,24 @@
+N2 Gumiho contains orchestration concepts and role prompts adapted from N2 Daebung.
+The MIT notice for that code is retained in LICENSE.
+
+n2-recipe provides mandatory lifecycle preparation, verification and durable
+scoped outcome collection. Its MIT notice is retained in LICENSE-N2R.
+Source https://github.com/choihyunsus/n2-recipe
+
+n2-mimir provides the common Soul SQLite schema and storage connections.
+Its published distribution terms are retained in LICENSE-MIMIR and
+LICENSE-MIMIR-APACHE. Its package includes additional upstream notices.
+Source https://github.com/choihyunsus/n2-mimir
+
+n2-clotho provides the recipe parser and bundled WASM compiler through n2-recipe.
+Its published distribution terms are retained in LICENSE-CLOTHO and LICENSE-APACHE.
+Its own package also includes the MIT notice for adapted Daebung code.
+Source https://github.com/choihyunsus/n2-clotho
+
+n2-personas provides generic task expertise through n2-recipe.
+Its MIT notice is retained in LICENSE-PERSONAS.
+Source https://github.com/choihyunsus/n2-personas
+
+Ajv, ajv-formats and better-sqlite3 are distributed under their MIT licenses.
+Their notices and those of transitive dependencies remain in the installed
+dependency packages. Consult those notices for the applicable terms.
