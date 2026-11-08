@@ -6,7 +6,20 @@
 
 [한국어](README.ko.md)
 
+<p align="center">
+  <img src="https://github.com/choihyunsus/n2-gumiho/raw/refs/heads/main/docs/images/comic.png" alt="Give one AI separate analysis, planning, implementation and review roles to work through a task." width="640">
+</p>
+
+Give one AI separate analysis, planning, implementation and review roles to work through a task.
+
+A story illustrating the feature, rather than a screenshot of the app.
+
+<details>
+<summary>View the workflow</summary>
+
 ![Analyze and plan → Work with tools → Review and test](https://github.com/choihyunsus/n2-gumiho/raw/refs/heads/main/docs/images/overview.svg)
+
+</details>
 
 ## When to use it
 

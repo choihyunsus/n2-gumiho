@@ -6,7 +6,20 @@
 
 [English](README.md)
 
+<p align="center">
+  <img src="https://github.com/choihyunsus/n2-gumiho/raw/refs/heads/main/docs/images/comic.png" alt="AI 하나에게 큰 작업을 맡기고 → 역할별 작업 공간을 나눠 → 구현과 검토를 진행하고 → 실제 결과를 검사합니다." width="640">
+</p>
+
+AI 하나에게 큰 작업을 맡기고 → 역할별 작업 공간을 나눠 → 구현과 검토를 진행하고 → 실제 결과를 검사합니다.
+
+기능을 이야기로 표현한 만화입니다. 실제 앱 화면은 아닙니다.
+
+<details>
+<summary>동작 흐름 펼쳐 보기</summary>
+
 ![분석과 계획 → 도구로 작업 → 검토와 실제 검사](https://github.com/choihyunsus/n2-gumiho/raw/refs/heads/main/docs/images/overview.ko.svg)
+
+</details>
 
 ## 이런 때 사용하세요
 
